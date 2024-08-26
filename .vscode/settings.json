@@ -1,9 +1,25 @@
 {
     "files.associations": {
         "log.h": "c",
-        "cjson.h": "c"
+        "cjson.h": "c",
+        "buffer_app.h": "c",
+        "stdlib.h": "c",
+        "string.h": "c",
+        "message_app.h": "c"
     },
     "C_Cpp.default.includePath": [
         "${workspaceFolder}"
+    ],
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/amu/桌面/gateway",
+            "binaryPath": "/home/amu/桌面/gateway/buffer_test",
+            "binaryArgs": []
+        },
+        {
+            "cwd": "/home/amu/桌面/gateway",
+            "binaryPath": "/home/amu/桌面/gateway/ggdb",
+            "binaryArgs": []
+        }
     ]
 }
