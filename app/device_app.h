@@ -21,7 +21,7 @@ typedef struct {
 } Device;
 
 
-// 定义一个结构体vTable，用于存储设备的各种回调函数指针
+// 定义一个结构体vTable，用于存储设备的操作表
 struct vTable 
 {
     // 设备接收回调函数指针

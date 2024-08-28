@@ -1,14 +1,21 @@
-cc := $(CROSS_COMPILE)gcc
+CC := $(CROSS_COMPILE)gcc
 #CROSS_COMPILE 交叉编译
-log:=thirdparty/log/log.h thirdparty/log/log.c
 
-cjson:=thirdparty/cJSON/cJSON.h thirdparty/cJSON/cJSON.c
+PEER := root@192.168.44.61
 
 #CFLAGS 在 makefile 中用于定义编译器的参数。它是一个环境变量，用于传递给编译器的命令行选项。
 #包括优化选项、警告选项、宏定义等
 CFLAGS := -Wall -Wextra
 
-#CFLAGS += -ggdb
+
+ifdef DEBUG
+CFLAGS += -ggdb
+endif
+
+
+ifdef SYSROOT
+CFLAGS += --sysroot $(SYSROOT)
+endif
 
 INC_DIRS += /home/amu/桌面/gateway
 
@@ -16,6 +23,7 @@ SRCS += $(shell find app -name '*.c')
 SRCS += $(shell find daemon -name '*.c')
 SRCS += $(shell find ota -name '*.c')
 SRCS += $(shell find thirdparty -name '*.c')
+
 
 
 OBJS := $(SRCS:.c=.o)
@@ -57,17 +65,9 @@ mqtt_test: $(OBJS) test/mqtt_test.o
 	-@$(RM) $@
 
 
-cjson_test:test/cjson_test.c $(cjson)
-	-@$(cc) -o $@ $^ -Ithirdparty
-	-@./$@
-	-@rm ./$@
-
-
-
-log_test:test/log_test.c $(log)
-	-@$(cc) -o $@ $^ -Ithirdparty
-	-@./$@
-	-@rm ./$@
-
-
+cross:
+	@CROSS_COMPILE=/桌面/board/toolchain/bin/arm-linux-gnueabihf- \
+	SYSROOT=/桌面/board/sysroot \
+	make all
+	@scp $(TARGET) $(PEER):/usr/bin/gateway
 

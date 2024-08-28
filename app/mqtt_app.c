@@ -47,6 +47,7 @@ int msgarrvd(void *context, char *topicName, int topicLen, MQTTClient_message *m
 {
     assert(context == NULL);
     log_trace("Message arrived: topic %s message:%s\n",topicName,message->payload);
+    /*会调用device_app_write函数*/
     int res = recv_callback(message->payload,message->payloadlen);
     return res == 0 ? 1 : 0;
 }

@@ -130,7 +130,7 @@ int device_app_init(Device *device,char *filename)
     {
         buffer_app_free(&device->recv_buf);
     }
-    
+    /*O_RDWR表示以读写方式打开，O_NOCTTY表示不将此设备作为控制终端*/
     device->fd = open(filename,O_RDWR | O_NOCTTY);
     if (device->fd < 0)
     {

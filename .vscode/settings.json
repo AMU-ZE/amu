@@ -5,7 +5,11 @@
         "buffer_app.h": "c",
         "stdlib.h": "c",
         "string.h": "c",
-        "message_app.h": "c"
+        "message_app.h": "c",
+        "unistd.h": "c",
+        "serial_app.h": "c",
+        "termios.h": "c",
+        "curl.h": "c"
     },
     "C_Cpp.default.includePath": [
         "${workspaceFolder}"

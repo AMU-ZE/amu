@@ -230,7 +230,7 @@ int message_app_initByBinary(Message *message, void*ptr,int len)
 }
 
 
-
+/*解析JSON格式的消息存到message*/
 int message_app_toJson(Message *message,char *json,int len)
 {
     cJSON *json_obj = cJSON_CreateObject();
@@ -238,7 +238,7 @@ int message_app_toJson(Message *message,char *json,int len)
     cJSON_AddStringToObject(json_obj,"id",message_app_BinaryToStr(message->mtr,message->id_len));
     cJSON_AddStringToObject(json_obj,"message",message_app_BinaryToStr(message->mtr + message->id_len,message->message_len));
 
-    char* json_str = cJSON_PrintUnformatted(json_obj);
+    char *json_str = cJSON_PrintUnformatted(json_obj);
     if ((int)strlen(json_str) +1 > len)
     {
         return -1;
